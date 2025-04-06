@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ctrl-cv</string>
+    <string name="passwordHint">Password</string>
+    <string name="emailHint">Email</string>
+    <string name="logoDiscription">App Logo</string>
+    <string name="signupLinkText">Don\'t have an account? Sign up</string>
+    <string name="loginButtonText">Login</string>
+    <string name="nameHint">Name</string>
+    <string name="confirmPasswordHint">Confirm Password</string>
+    <string name="phoneHint">Phone Number</string>
+    <string name="signupButtonText">Sign Up</string>
+    <string name="loginLinkText">Already have an account? Login</string>
 </resources>
