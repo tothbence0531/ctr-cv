@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -21,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getName();
     private TextInputEditText emailET;
     private TextInputEditText passwordET;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -33,10 +41,17 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        
+        mAuth = FirebaseAuth.getInstance();
 
         emailET = findViewById(R.id.emailEditText);
         passwordET = findViewById(R.id.passwordEditText);
 
+    }
+
+    public void toMainPage() {
+        Intent intent = new Intent(LoginActivity.this, JobsActivity.class);
+        startActivity(intent);
     }
 
     public void onSignupClick(View view) {
@@ -54,8 +69,30 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view) {
         String email = Objects.requireNonNull(this.emailET.getText()).toString();
         String password = Objects.requireNonNull(this.passwordET.getText()).toString();
+        
+        if(email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Fill in every field", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.i(TAG, "email: " + email + '\n' + "password: " + password);
 
-        Log.i(TAG, "email: " + email + '\n' + "password: " + password);
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "onComplete: User logged in successfully");
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        toMainPage();
+                        finish();
+                    } else {
+                        Log.d(TAG, "onComplete: Failed to login user");
+                        emailET.startAnimation(AnimationUtils.loadAnimation(LoginActivity.this, R.anim.shake));
+                        passwordET.startAnimation(AnimationUtils.loadAnimation(LoginActivity.this, R.anim.shake));
+                        Toast.makeText(LoginActivity.this, "Login failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
 
     }
 }
