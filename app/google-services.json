@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920464445312",
+    "project_id": "ctrl-cv-8fa6d",
+    "storage_bucket": "ctrl-cv-8fa6d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920464445312:android:7ac719bccd29cfad51bb65",
+        "android_client_info": {
+          "package_name": "com.example.ctrl_cv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0IVBA91rgbW9v5byKL3a19HnGxpqf8Yg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

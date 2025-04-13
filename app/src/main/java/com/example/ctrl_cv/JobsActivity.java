@@ -2,9 +2,8 @@ package com.example.ctrl_cv;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -25,16 +24,13 @@ public class JobsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Először ellenőrizd a bejelentkezési állapotot
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
-            // Ha nincs bejelentkezve felhasználó, irányítsd a bejelentkező oldalra
             startActivity(new Intent(this, LoginActivity.class));
-            finish(); // Ne hagyd meg ezt az Activity-t a back stack-ben
+            finish();
             return;
         }
 
-        // Ha be van jelentkezve, folytasd a normál működéssel
         setContentView(R.layout.activity_jobs);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -43,11 +39,9 @@ public class JobsActivity extends AppCompatActivity {
             return;
         }
 
-        // Modern back press handling for MainActivity
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                // Exit the app when back is pressed from MainActivity
                 finishAffinity();
             }
         });
@@ -59,7 +53,6 @@ public class JobsActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.nav_jobs) {
-                    // Already on jobs page
                     return true;
                 } else if (itemId == R.id.nav_my_listings) {
                     startActivity(new Intent(JobsActivity.this, MyListingsActivity.class));
@@ -78,7 +71,6 @@ public class JobsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Always show Jobs as selected when returning to MainActivity
         bottomNavigationView.setSelectedItemId(R.id.nav_jobs);
     }
 }

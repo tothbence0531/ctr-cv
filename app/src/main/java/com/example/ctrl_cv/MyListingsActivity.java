@@ -11,12 +11,10 @@ public class MyListingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_listings);
 
-        // Set up back button
         findViewById(R.id.btn_back).setOnClickListener(v -> {
             getOnBackPressedDispatcher().onBackPressed();
         });
 
-        // Modern back press handling
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
