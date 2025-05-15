@@ -10,4 +10,10 @@
     <string name="phoneHint">Phone Number</string>
     <string name="signupButtonText">Sign Up</string>
     <string name="loginLinkText">Already have an account? Login</string>
+    <string name="job_title">Job Title</string>
+    <string name="company_name">Company Name</string>
+    <string name="location_x_y">Location · €X - €Y</string>
+    <string name="job_description">Job description</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="available_jobs">Available Jobs</string>
 </resources>

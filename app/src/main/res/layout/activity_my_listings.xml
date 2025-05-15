@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myListingsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:fitsSystemWindows="true"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_back"
@@ -21,13 +24,25 @@
         android:layout_height="wrap_content"
         android:text="My Job Listings"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
 
-    <!-- Placeholder content -->
-    <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/cardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_listing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Your job listings will appear here"
-        android:textAlignment="center"/>
+        android:text="Add Listing"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 </LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_name" type="id" />
+    <item name="tv_email" type="id" />
+    <item name="tv_phone" type="id" />
+    <item name="tv_listings_count" type="id" />
+    <item name="tv_applications_count" type="id" />
+    <item name="btn_logout" type="id" />
+</resources>

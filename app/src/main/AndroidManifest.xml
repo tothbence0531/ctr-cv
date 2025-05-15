@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,11 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
+        <receiver android:name=".ListingAlarmReceiver" />
+
         <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".AddListingActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".EditListingActivity"
             android:exported="false">
         </activity>
         <activity

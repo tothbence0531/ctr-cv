@@ -18,7 +18,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity {
@@ -72,33 +74,58 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
-        String email = Objects.requireNonNull(this.emailET.getText()).toString();
-        String password = Objects.requireNonNull(this.passwordET.getText()).toString();
-        String rePassword = Objects.requireNonNull(this.rePasswordET.getText()).toString();
-        String name = Objects.requireNonNull(this.nameET.getText()).toString();
-        String phone = Objects.requireNonNull(this.phoneET.getText()).toString();
+        String email = Objects.requireNonNull(this.emailET.getText()).toString().trim();
+        String password = Objects.requireNonNull(this.passwordET.getText()).toString().trim();
+        String rePassword = Objects.requireNonNull(this.rePasswordET.getText()).toString().trim();
+        String name = Objects.requireNonNull(this.nameET.getText()).toString().trim();
+        String phone = Objects.requireNonNull(this.phoneET.getText()).toString().trim();
 
-        if(email.isEmpty() || password.isEmpty() || rePassword.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+        // 1. Validációk
+        if (email.isEmpty() || password.isEmpty() || rePassword.isEmpty() || name.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "Fill in every field", Toast.LENGTH_SHORT).show();
-        }else if (!password.equals(rePassword)) {
+            return;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!password.equals(rePassword)) {
             Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.i(TAG, "email: " + email + "\npassword: " + password + "\nrepassword: " + rePassword + "\nname: " + name + "\nphone: " + phone);
-
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()) {
-                        Log.d(TAG, "onComplete: User added successfully");
-                        toMainPage();
-                    } else {
-                        Log.d(TAG, "onComplete: Failed to add user");
-                        Toast.makeText(SignupActivity.this, "Failed to add user: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+            return;
+        }
+        if (password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        // 2. Firebase Auth - felhasználó létrehozása
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
+                // 3. Firestore dokumentum létrehozása
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                User newUser = new User(userId, name, email, phone, new ArrayList<>(), new ArrayList<>());
+
+                db.collection("Users")
+                        .document(userId)
+                        .set(newUser)
+                        .addOnSuccessListener(aVoid -> {
+                            Log.d(TAG, "User profile saved to Firestore");
+                            Toast.makeText(SignupActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                            toMainPage();
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e(TAG, "Error saving user to Firestore", e);
+                            Toast.makeText(SignupActivity.this, "Registration failed: couldn't save user data", Toast.LENGTH_LONG).show();
+                        });
+
+            } else {
+                Log.d(TAG, "User registration failed");
+                Toast.makeText(SignupActivity.this, "Failed to add user: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
 }
