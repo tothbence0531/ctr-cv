@@ -12,7 +12,6 @@
         tools:context=".SignupActivity"
         android:layout_margin="20dp">
 
-        <!-- App logo -->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="196dp"
@@ -24,7 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Name input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
             android:layout_width="0dp"
@@ -43,7 +41,6 @@
                 android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Email input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
             android:layout_width="0dp"
@@ -62,7 +59,6 @@
                 android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Password input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
             android:layout_width="0dp"
@@ -81,7 +77,6 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Confirm Password input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordLayout"
             android:layout_width="0dp"
@@ -100,7 +95,6 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Phone input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneLayout"
             android:layout_width="0dp"
@@ -119,7 +113,6 @@
                 android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Sign Up button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signupButton"
             android:layout_width="0dp"
@@ -134,7 +127,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="signup"/>
 
-        <!-- Login link -->
         <TextView
             android:id="@+id/loginText"
             android:layout_width="wrap_content"

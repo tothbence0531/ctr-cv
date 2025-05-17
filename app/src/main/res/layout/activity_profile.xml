@@ -16,7 +16,6 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp">
 
-        <!-- Add this at the top of your LinearLayout inside ScrollView -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -27,7 +26,6 @@
             app:icon="@drawable/ic_arrow_back"
             app:iconTint="@color/colorPrimary"/>
 
-        <!-- Profile Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +57,6 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Account Section -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,7 +102,6 @@
 
 
 
-        <!-- Logout Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"

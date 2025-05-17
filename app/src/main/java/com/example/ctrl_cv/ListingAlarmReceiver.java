@@ -18,8 +18,8 @@ public class ListingAlarmReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "listing_channel")
                 .setSmallIcon(R.drawable.ic_jobs)
-                .setContentTitle("Emlékeztető")
-                .setContentText("Ne feledd az új hirdetésed: " + title)
+                .setContentTitle("Reminder")
+                .setContentText("Don't forget your listing: " + title)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);

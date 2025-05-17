@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <!-- Custom colors -->
-        <color name="colorPrimary">#cc193f</color> <!-- Fő szín (a piros szín) -->
-        <color name="colorPrimaryVariant">#9b1536</color> <!-- Sötétebb fő szín -->
-        <color name="colorSecondary">#cc193f</color> <!-- Másodlagos szín -->
-        <color name="colorSecondaryVariant">#9b1536</color> <!-- Sötétebb másodlagos szín -->
-        <color name="colorBackground">#FFFFFF</color> <!-- Háttér szín (fehér) -->
-        <color name="colorSurface">#FFFFFF</color> <!-- Felület szín -->
-        <color name="colorError">#B00020</color> <!-- Hiba szín -->
-        <color name="colorOnPrimary">#FFFFFF</color> <!-- Szöveg a fő színen -->
-        <color name="colorOnSecondary">#FFFFFF</color> <!-- Szöveg a másodlagos színen -->
-        <color name="colorOnBackground">#000000</color> <!-- Szöveg a háttéren -->
-        <color name="colorOnSurface">#000000</color> <!-- Szöveg a felületen -->
-        <color name="colorControlActivated">#cc193f</color> <!-- Fókusz szín (piros) -->
-        <color name="colorControlHighlight">#FF4081</color> <!-- Kiemelés szín -->
+        <color name="colorPrimary">#cc193f</color>
+        <color name="colorPrimaryVariant">#9b1536</color>
+        <color name="colorSecondary">#cc193f</color>
+        <color name="colorSecondaryVariant">#9b1536</color>
+        <color name="colorBackground">#FFFFFF</color>
+        <color name="colorSurface">#FFFFFF</color>
+        <color name="colorError">#B00020</color>
+        <color name="colorOnPrimary">#FFFFFF</color>
+        <color name="colorOnSecondary">#FFFFFF</color>
+        <color name="colorOnBackground">#000000</color>
+        <color name="colorOnSurface">#000000</color>
+        <color name="colorControlActivated">#cc193f</color>
+        <color name="colorControlHighlight">#FF4081</color>
 
 </resources>

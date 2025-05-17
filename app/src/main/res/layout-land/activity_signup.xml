@@ -13,7 +13,6 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <!-- App logo -->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="196dp"
@@ -23,7 +22,6 @@
             android:layout_marginTop="48dp"
             android:layout_gravity="center_horizontal" />
 
-        <!-- Name input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
             android:layout_width="match_parent"
@@ -39,7 +37,6 @@
                 android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Email input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
             android:layout_width="match_parent"
@@ -55,7 +52,6 @@
                 android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Password input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
@@ -71,7 +67,6 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Confirm Password input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordLayout"
             android:layout_width="match_parent"
@@ -87,7 +82,6 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Phone input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneLayout"
             android:layout_width="match_parent"
@@ -103,7 +97,6 @@
                 android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Sign Up button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signupButton"
             android:layout_width="match_parent"
@@ -115,7 +108,6 @@
             android:layout_marginTop="24dp"
             android:onClick="signup"/>
 
-        <!-- Login link -->
         <TextView
             android:id="@+id/loginText"
             android:layout_width="wrap_content"

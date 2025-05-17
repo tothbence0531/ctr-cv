@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         tvEmail.setText(user.getEmail()); // Auth-ból
 
-        // Firestore-ból adatlekérés
+
         FirebaseFirestore.getInstance()
                 .collection("Users")
                 .document(user.getUid())
@@ -106,7 +106,6 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadApplicationsByStatus(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // PENDING
         db.collection("Applications")
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "pending")
@@ -131,7 +130,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-        // ACCEPTED
         db.collection("Applications")
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "accepted")
@@ -156,7 +154,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-        // REJECTED
         db.collection("Applications")
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("status", "rejected")

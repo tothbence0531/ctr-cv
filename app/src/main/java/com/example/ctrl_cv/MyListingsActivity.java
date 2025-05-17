@@ -95,7 +95,7 @@ public class MyListingsActivity extends AppCompatActivity {
 
                             myListingsContainer.addView(listingCard);
 
-                            // Miután a listingCard-ot létrehoztad
+
                             LinearLayout applicationsContainer = new LinearLayout(this);
                             applicationsContainer.setOrientation(LinearLayout.VERTICAL);
                             ((LinearLayout) listingCard.findViewById(R.id.cardContent)).addView(applicationsContainer);
@@ -124,7 +124,7 @@ public class MyListingsActivity extends AppCompatActivity {
     private void loadApplicationsForListing(String listingId, LinearLayout container) {
         db.collection("Applications")
                 .whereEqualTo("listingId", listingId)
-                .whereEqualTo("status", "pending")  // ✅ Csak a pending státuszú jelentkezések
+                .whereEqualTo("status", "pending")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
@@ -136,13 +136,13 @@ public class MyListingsActivity extends AppCompatActivity {
                                 .addOnSuccessListener(userDoc -> {
                                     String name = userDoc.getString("name");
                                     String email = userDoc.getString("email");
-                                    String phone = userDoc.getString("phoneNumber");  // ✅ Telefonszám lekérdezése
+                                    String phone = userDoc.getString("phoneNumber");
 
                                     View applicationView = LayoutInflater.from(this).inflate(R.layout.application_card, container, false);
 
                                     ((TextView) applicationView.findViewById(R.id.applicantName)).setText("Name: " + name);
                                     ((TextView) applicationView.findViewById(R.id.applicantEmail)).setText("Email: " + email);
-                                    ((TextView) applicationView.findViewById(R.id.statusText)).setText("Phone: " + phone); // ✅ Telefonszám kiírása
+                                    ((TextView) applicationView.findViewById(R.id.statusText)).setText("Phone: " + phone);
 
                                     Button acceptBtn = applicationView.findViewById(R.id.acceptButton);
                                     Button rejectBtn = applicationView.findViewById(R.id.rejectButton);
@@ -186,7 +186,7 @@ public class MyListingsActivity extends AppCompatActivity {
 
                     db.collection("Listings").document(listingId).delete();
 
-                    // Helyesen: myListings mezőből töröljük
+
                     db.collection("Users").document(currentUser.getUid())
                             .update("myListings", com.google.firebase.firestore.FieldValue.arrayRemove(listingId));
 

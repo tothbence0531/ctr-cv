@@ -71,7 +71,7 @@ public class JobsActivity extends AppCompatActivity {
                             String userId = checkuser.getUid();
                             String listingId = doc.getId();
 
-                            // 1. Saját hirdetésre ne tudjon jelentkezni
+
                             if (userId.equals(listing.getUserId())) {
                                 Toast.makeText(JobsActivity.this, "You can't apply to your own listing.", Toast.LENGTH_SHORT).show();
                                 return;
@@ -79,7 +79,7 @@ public class JobsActivity extends AppCompatActivity {
 
                             FirebaseFirestore dbInstance = FirebaseFirestore.getInstance();
 
-                            // 2. Ellenőrizni, hogy már jelentkezett-e
+
                             dbInstance.collection("Applications")
                                     .whereEqualTo("userId", userId)
                                     .whereEqualTo("listingId", listingId)
@@ -88,7 +88,7 @@ public class JobsActivity extends AppCompatActivity {
                                         if (!querySnapshot.isEmpty()) {
                                             Toast.makeText(JobsActivity.this, "You have already applied for this job.", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            // Ha még nem jelentkezett, létrehozzuk az új application-t
+
                                             Application application = new Application(userId, listingId, "pending");
 
                                             dbInstance.collection("Applications")
@@ -98,7 +98,7 @@ public class JobsActivity extends AppCompatActivity {
                                                         Log.d(TAG, "Application submitted: " + applicationId);
                                                         Toast.makeText(JobsActivity.this, "Application submitted successfully!", Toast.LENGTH_SHORT).show();
 
-                                                        // Frissítjük a felhasználó applications mezőjét
+
                                                         dbInstance.collection("Users")
                                                                 .document(userId)
                                                                 .update("applications", com.google.firebase.firestore.FieldValue.arrayUnion(applicationId))
@@ -127,7 +127,7 @@ public class JobsActivity extends AppCompatActivity {
             Log.e("Firestore", "Error loading listings", e);
         });
 
-        // Bottom nav setup...
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();

@@ -1,28 +1,20 @@
 <resources>
-    <!-- Base application theme -->
     <style name="Theme.MyApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary color for the Material components -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
 
-        <!-- Secondary color -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
 
-        <!-- Background color -->
         <item name="android:windowBackground">@color/colorBackground</item>
 
-        <!-- On-color for text and icons on top of primary color -->
         <item name="android:textColorPrimary">@color/colorOnPrimary</item>
         <item name="android:textColorSecondary">@color/colorOnSecondary</item>
 
-        <!-- Control color (focus, etc.) -->
         <item name="colorControlActivated">@color/colorControlActivated</item>
 
-        <!-- Highlight color (buttons and interaction highlights) -->
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
 
-        <!-- Customize TextInput and Buttons color -->
         <item name="colorSurface">@color/colorSurface</item>
         <item name="android:textColor">@color/colorOnSurface</item>
     </style>

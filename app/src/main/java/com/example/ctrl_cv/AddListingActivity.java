@@ -66,7 +66,7 @@ public class AddListingActivity extends AppCompatActivity {
 
         btnSubmit.setOnClickListener(v -> addListing());
 
-        // Hely permission ellenőrzése vagy kérés
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         } else {
@@ -135,8 +135,8 @@ public class AddListingActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "listing_channel")
                 .setSmallIcon(R.drawable.ic_jobs)
-                .setContentTitle("Új álláshirdetés!")
-                .setContentText("Új hirdetés: " + title)
+                .setContentTitle("New job posted!")
+                .setContentText("New job: " + title)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
@@ -154,7 +154,7 @@ public class AddListingActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (alarmManager != null) {
-            long triggerAtMillis = System.currentTimeMillis() + 3600 * 1000; // 1 óra múlva
+            long triggerAtMillis = System.currentTimeMillis() + 3600 * 1000;
             alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         }
     }

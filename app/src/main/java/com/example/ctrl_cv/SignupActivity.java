@@ -81,7 +81,6 @@ public class SignupActivity extends AppCompatActivity {
         String name = Objects.requireNonNull(this.nameET.getText()).toString().trim();
         String phone = Objects.requireNonNull(this.phoneET.getText()).toString().trim();
 
-        // 1. Validációk
         if (email.isEmpty() || password.isEmpty() || rePassword.isEmpty() || name.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "Fill in every field", Toast.LENGTH_SHORT).show();
             return;
@@ -99,12 +98,10 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        // 2. Firebase Auth - felhasználó létrehozása
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
                 String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-                // 3. Firestore dokumentum létrehozása
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 User newUser = new User(userId, name, email, phone, new ArrayList<>(), new ArrayList<>());
