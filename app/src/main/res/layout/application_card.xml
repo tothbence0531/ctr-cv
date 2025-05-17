@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="#f0f0f0"
+    android:layout_marginTop="8dp">
+
+    <TextView
+        android:id="@+id/applicantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/applicantEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept" />
+
+        <Button
+            android:id="@+id/rejectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reject"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ public class MyListingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_my_listings);
 
         myListingsContainer = findViewById(R.id.cardContainer);
@@ -92,11 +94,69 @@ public class MyListingsActivity extends AppCompatActivity {
                             });
 
                             myListingsContainer.addView(listingCard);
+
+                            // Miután a listingCard-ot létrehoztad
+                            LinearLayout applicationsContainer = new LinearLayout(this);
+                            applicationsContainer.setOrientation(LinearLayout.VERTICAL);
+                            ((LinearLayout) listingCard.findViewById(R.id.cardContent)).addView(applicationsContainer);
+
+                            loadApplicationsForListing(listingId, applicationsContainer);
+
                         }
                     }
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "Error loading listings", e));
     }
+
+    private void updateApplicationStatus(String applicationId, String newStatus, View applicationView) {
+        db.collection("Applications").document(applicationId)
+                .update("status", newStatus)
+                .addOnSuccessListener(aVoid -> {
+                    ((TextView) applicationView.findViewById(R.id.statusText)).setText("Status: " + newStatus);
+                    Toast.makeText(this, "Application " + newStatus, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Error updating status", e);
+                });
+    }
+
+    private void loadApplicationsForListing(String listingId, LinearLayout container) {
+        db.collection("Applications")
+                .whereEqualTo("listingId", listingId)
+                .whereEqualTo("status", "pending")  // ✅ Csak a pending státuszú jelentkezések
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String applicationId = doc.getId();
+                        String applicantId = doc.getString("userId");
+
+                        db.collection("Users").document(applicantId)
+                                .get()
+                                .addOnSuccessListener(userDoc -> {
+                                    String name = userDoc.getString("name");
+                                    String email = userDoc.getString("email");
+                                    String phone = userDoc.getString("phoneNumber");  // ✅ Telefonszám lekérdezése
+
+                                    View applicationView = LayoutInflater.from(this).inflate(R.layout.application_card, container, false);
+
+                                    ((TextView) applicationView.findViewById(R.id.applicantName)).setText("Name: " + name);
+                                    ((TextView) applicationView.findViewById(R.id.applicantEmail)).setText("Email: " + email);
+                                    ((TextView) applicationView.findViewById(R.id.statusText)).setText("Phone: " + phone); // ✅ Telefonszám kiírása
+
+                                    Button acceptBtn = applicationView.findViewById(R.id.acceptButton);
+                                    Button rejectBtn = applicationView.findViewById(R.id.rejectButton);
+
+                                    acceptBtn.setOnClickListener(v -> updateApplicationStatus(applicationId, "accepted", applicationView));
+                                    rejectBtn.setOnClickListener(v -> updateApplicationStatus(applicationId, "rejected", applicationView));
+
+                                    container.addView(applicationView);
+                                });
+                    }
+                });
+    }
+
+
 
     private void confirmAndDeleteListing(String listingId) {
         new AlertDialog.Builder(this)

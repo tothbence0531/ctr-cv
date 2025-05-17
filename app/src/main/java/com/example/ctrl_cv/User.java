@@ -5,15 +5,15 @@ import java.util.List;
 
 public class User {
     private String uid;
-    private String nev;
+    private String name;
     private String email;
     private String phoneNumber;
     private List<String> applications;
     private List<String> myListings;
 
-    public User(String uid, String nev, String email, String phoneNumber, List<String> applications, List<String> myListings) {
+    public User(String uid, String name, String email, String phoneNumber, List<String> applications, List<String> myListings) {
         this.uid = uid;
-        this.nev = nev;
+        this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.applications = applications;
@@ -22,7 +22,7 @@ public class User {
 
     public User() {
         this.uid = "";
-        this.nev = "";
+        this.name = "";
         this.email = "";
         this.phoneNumber = "";
         this.applications = new ArrayList<>();
@@ -37,12 +37,12 @@ public class User {
         this.uid = uid;
     }
 
-    public String getNev() {
-        return nev;
+    public String getName() {
+        return name;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
